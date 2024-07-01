@@ -1,0 +1,12 @@
+let n_left = { data <= 12; left <= 0; right <= 0} (* 0 in head signals null *) 
+in let n_right = { data <= 44; left <= 0; right <= 0}
+in let n_root = { data <= 33; left <= n_left ; right <= n_right } 
+in let t1 = { root <= n_root ; length <= 3}
+in letrec sum_tree_helper (nd) = 
+if number?(nd)
+then 0
+else nd.data + (sum_tree_helper nd.left) + (sum_tree_helper nd.right) 
+in let sum_tree = proc (t) { (sum_tree_helper t.root) }
+in begin
+(sum_tree t1)
+end
